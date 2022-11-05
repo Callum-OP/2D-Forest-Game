@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class Defeats
+{
+    // Controls defeats value
+    public static int defeats;
+}
+
 public class PlayerAttack : MonoBehaviour
 {
     private Animator anim;
@@ -29,6 +35,7 @@ public class PlayerAttack : MonoBehaviour
                 for (int i = 0; i < damage.Length; i++)
                 {
                     Destroy( damage[i].gameObject );
+                    Defeats.defeats = Defeats.defeats + 1;
                 }
             }
             attackTime = startTimeAttack;
