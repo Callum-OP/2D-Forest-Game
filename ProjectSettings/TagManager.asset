@@ -8,6 +8,8 @@ TagManager:
   - Fruit
   - Enemy
   - Chest
+  - Bullet
+  - Gem
   layers:
   - Default
   - TransparentFX

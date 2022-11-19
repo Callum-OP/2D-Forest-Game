@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2552703043745818051}
   - component: {fileID: 2552703043745818050}
   - component: {fileID: 2552703043745818053}
+  - component: {fileID: 2061543767245486354}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -155,9 +156,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2408006d5e96a364fb084b10853b3d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 4483032738951693966, guid: c281235afc28e0248b488d8e5218e1b3, type: 3}
   wanderSpeed: 0.5
   chaseSpeed: 1
   waypoints:
   - {x: 2.77, y: 1}
   - {x: 3.69, y: 0.4}
+  prefabToSpawn: {fileID: 280133082691073591, guid: 5ac5364fedb936345a24d84170fc03bf,
+    type: 3}
+--- !u!95 &2061543767245486354
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552703043745818052}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2d2059b39e595b942ad61a0436d333db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

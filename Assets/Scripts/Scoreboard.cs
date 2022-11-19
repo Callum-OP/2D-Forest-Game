@@ -28,7 +28,7 @@ public class Scoreboard : MonoBehaviour
 		timeText.text = "Seconds Taken: " + Scores.time.ToString();
 
         // Display enemies defeated
-		defeatsText.text = "Enemies Defeated: " + Defeats.defeats.ToString();
+		defeatsText.text = "Enemies Defeated: " + Scores.defeats.ToString();
 
         // Display hearts used
 		heartsText.text = "Hearts Used: " + Scores.hearts.ToString();

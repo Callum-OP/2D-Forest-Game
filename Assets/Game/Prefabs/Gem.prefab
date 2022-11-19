@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3214631687008135738}
   - component: {fileID: 3214631687008135739}
   - component: {fileID: 4247264807916135259}
+  - component: {fileID: 5101557248246397876}
   m_Layer: 0
   m_Name: Gem
-  m_TagString: Chest
+  m_TagString: Gem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,3 +113,22 @@ PolygonCollider2D:
       - {x: -0.035, y: -0.035}
       - {x: 0.035, y: -0.035}
       - {x: 0.035, y: 0.035}
+--- !u!95 &5101557248246397876
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3214631687008135740}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e8a81d8eadf1b1d48be95956980ee9d8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
