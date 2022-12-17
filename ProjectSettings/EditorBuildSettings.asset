@@ -4,5 +4,32 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Game/Scenes/Menus/Splash Screen.unity
+    guid: 0972b1e0ef7444340bada400117ff054
+  - enabled: 1
+    path: Assets/Game/Scenes/Menus/Select Mode.unity
+    guid: 66f51a3598e400a419cf8386c99ddefb
+  - enabled: 1
+    path: Assets/Game/Scenes/Menus/Select Difficulty.unity
+    guid: a8c9952da8ff74b479ad650b713590b8
+  - enabled: 1
+    path: Assets/Game/Scenes/Adventure/Level 1.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Game/Scenes/Adventure/Death Scene.unity
+    guid: 048f08b43fc711a47a1dc89a8d1820a2
+  - enabled: 1
+    path: Assets/Game/Scenes/Adventure/Level Scoreboard.unity
+    guid: 2468c8014e6325e4d9b9fca40a6fe93f
+  - enabled: 1
+    path: Assets/Game/Scenes/Adventure/Level 2.unity
+    guid: 8cbcf278158e6fb4982d5fca9643a519
+  - enabled: 1
+    path: Assets/Game/Scenes/Survival/Survival Mode.unity
+    guid: 201db01a0958d504db9d104a64cac970
+  - enabled: 1
+    path: Assets/Game/Scenes/Survival/Survival Scoreboard.unity
+    guid: b97d07b3119e74048965f49d8418cb9a
   m_configObjects: {}
