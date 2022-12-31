@@ -6,6 +6,21 @@ using TMPro;
 // Allows for scene management
 using UnityEngine.SceneManagement;
 
+// Class for storing details about the player
+public class Player {
+    // Store the speed value
+    public static float speed;
+    // Store the time it takes to create projectile
+    public static float creationRate;
+    // Store the speed projectile will travel at
+    public static float shootSpeed;
+    // Store current health value
+    public static int health;
+    // Store max health value
+    public static int maxHealth;
+}
+
+// Class for managing the player and user interface
 public class AdventurePlayer : MonoBehaviour
 {
     [Header("User Interface")]
@@ -15,6 +30,11 @@ public class AdventurePlayer : MonoBehaviour
     public Image heart3;
     public Image heart4;
     public Image heart5;
+    public Image heart6;
+    public Image heart7;
+    public Image heart8;
+    public Image heart9;
+    public Image heart10;
     // Sprites used to change the display of the hearts in the UI
     public Sprite fullHeart;
     public Sprite emptyHeart;
@@ -136,6 +156,13 @@ public class AdventurePlayer : MonoBehaviour
             shootSpeed = 2f;
         }
 
+        // Store player information globally
+        Player.speed = speed;
+        Player.maxHealth = maxHealth;
+        Player.creationRate = creationRate;
+        Player.shootSpeed = shootSpeed;
+        Player.maxHealth = maxHealth;
+
         // --Scoreboard and game details--
         // Set the score value to zero
 		Scores.score = 0;
@@ -164,6 +191,13 @@ public class AdventurePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Update values for player
+        speed = Player.speed;
+        maxHealth = Player.maxHealth;
+        creationRate = Player.creationRate;
+        shootSpeed = Player.shootSpeed;
+        maxHealth = Player.maxHealth;
+
         // Set the current level time
         levelTime += Time.deltaTime;
         // Show the time taken so far in seconds
@@ -294,6 +328,12 @@ public class AdventurePlayer : MonoBehaviour
         } else {
             anim.SetBool("Is_attacking", false);
         }
+
+        // Keep values for the User Interface up to date
+		SetHealthText();
+		SetScoreText();
+        SetGemsText();
+        SetLevelText();
     }
 
     // When player collides with other objects
@@ -317,6 +357,18 @@ public class AdventurePlayer : MonoBehaviour
             other.gameObject.SetActive(false);
             // Add ten to the variable score
 			Scores.score = Scores.score + 10;
+            // Play coin pickup sound
+            audio.clip = coinPickup;
+            audio.Play();
+			// Run the SetScoreText() function
+			SetScoreText();
+        }
+        // Chests will give score to player
+        if(other.gameObject.CompareTag("Chest")) {
+            // Destroy other object
+            other.gameObject.SetActive(false);
+            // Add one hundred to the variable score
+			Scores.score = Scores.score + 1000;
             // Play coin pickup sound
             audio.clip = coinPickup;
             audio.Play();
@@ -356,8 +408,39 @@ public class AdventurePlayer : MonoBehaviour
     // Used to set the text in the UI to the correct amount of health player has
     void SetHealthText()
 	{
+        //  Set current health value stored in player class
+        Player.health = health;
+
         // Change hearts in UI based on max health
         switch (maxHealth) {
+            // If max health is 1
+            case 1:
+                // Show first heart
+                heart1.enabled = true;
+                heart2.enabled = false;
+                heart3.enabled = false;
+                heart4.enabled = false;
+                heart5.enabled = false;
+                heart6.enabled = false;
+                heart7.enabled = false;
+                heart8.enabled = false;
+                heart9.enabled = false;
+                heart10.enabled = false;
+                break;
+            // If max health is 2
+            case 2:
+                // Show first 2 hearts
+                heart1.enabled = true;
+                heart2.enabled = true;
+                heart3.enabled = false;
+                heart4.enabled = false;
+                heart5.enabled = false;
+                heart6.enabled = false;
+                heart7.enabled = false;
+                heart8.enabled = false;
+                heart9.enabled = false;
+                heart10.enabled = false;
+                break;
             // If max health is 3
             case 3:
                 // Show first 3 hearts
@@ -366,6 +449,11 @@ public class AdventurePlayer : MonoBehaviour
                 heart3.enabled = true;
                 heart4.enabled = false;
                 heart5.enabled = false;
+                heart6.enabled = false;
+                heart7.enabled = false;
+                heart8.enabled = false;
+                heart9.enabled = false;
+                heart10.enabled = false;
                 break;
             // If max health is 4
             case 4:
@@ -375,6 +463,11 @@ public class AdventurePlayer : MonoBehaviour
                 heart3.enabled = true;
                 heart4.enabled = true;
                 heart5.enabled = false;
+                heart6.enabled = false;
+                heart7.enabled = false;
+                heart8.enabled = false;
+                heart9.enabled = false;
+                heart10.enabled = false;
                 break;
             // If max health is 5
             case 5:
@@ -384,6 +477,81 @@ public class AdventurePlayer : MonoBehaviour
                 heart3.enabled = true;
                 heart4.enabled = true;
                 heart5.enabled = true;
+                heart6.enabled = false;
+                heart7.enabled = false;
+                heart8.enabled = false;
+                heart9.enabled = false;
+                heart10.enabled = false;
+                break;
+            // If max health is 6
+            case 6:
+                // Show first 6 hearts
+                heart1.enabled = true;
+                heart2.enabled = true;
+                heart3.enabled = true;
+                heart4.enabled = true;
+                heart5.enabled = true;
+                heart6.enabled = true;
+                heart7.enabled = false;
+                heart8.enabled = false;
+                heart9.enabled = false;
+                heart10.enabled = false;
+                break;
+            // If max health is 7
+            case 7:
+                // Show first 7 hearts
+                heart1.enabled = true;
+                heart2.enabled = true;
+                heart3.enabled = true;
+                heart4.enabled = true;
+                heart5.enabled = true;
+                heart6.enabled = true;
+                heart7.enabled = true;
+                heart8.enabled = false;
+                heart9.enabled = false;
+                heart10.enabled = false;
+                break;
+            // If max health is 8
+            case 8:
+                // Show first 8 hearts
+                heart1.enabled = true;
+                heart2.enabled = true;
+                heart3.enabled = true;
+                heart4.enabled = true;
+                heart5.enabled = true;
+                heart6.enabled = true;
+                heart7.enabled = true;
+                heart8.enabled = true;
+                heart9.enabled = false;
+                heart10.enabled = false;
+                break;
+            // If max health is 9
+            case 9:
+                // Show first 9 hearts
+                heart1.enabled = true;
+                heart2.enabled = true;
+                heart3.enabled = true;
+                heart4.enabled = true;
+                heart5.enabled = true;
+                heart6.enabled = true;
+                heart7.enabled = true;
+                heart8.enabled = true;
+                heart9.enabled = true;
+                heart10.enabled = false;
+                break;
+            // If max health is 10
+            case 10:
+                // Show all 10 hearts
+                heart1.enabled = true;
+                heart2.enabled = true;
+                heart3.enabled = true;
+                heart4.enabled = true;
+                heart5.enabled = true;
+                heart6.enabled = true;
+                heart7.enabled = true;
+                heart8.enabled = true;
+                heart9.enabled = true;
+                heart10.enabled = true;
                 break;
         }
 
@@ -398,6 +566,11 @@ public class AdventurePlayer : MonoBehaviour
                 heart3.sprite = emptyHeart;
                 heart4.sprite = emptyHeart;
                 heart5.sprite = emptyHeart;
+                heart6.sprite = emptyHeart;
+                heart7.sprite = emptyHeart;
+                heart8.sprite = emptyHeart;
+                heart9.sprite = emptyHeart;
+                heart10.sprite = emptyHeart;
                 // Reset gems to get
                 Scores.gemsToGet = 1;
                 // Reset level number
@@ -412,6 +585,11 @@ public class AdventurePlayer : MonoBehaviour
                 heart3.sprite = emptyHeart;
                 heart4.sprite = emptyHeart;
                 heart5.sprite = emptyHeart;
+                heart6.sprite = emptyHeart;
+                heart7.sprite = emptyHeart;
+                heart8.sprite = emptyHeart;
+                heart9.sprite = emptyHeart;
+                heart10.sprite = emptyHeart;
                 break;
             // If health is 2
             case 2:
@@ -420,6 +598,11 @@ public class AdventurePlayer : MonoBehaviour
                 heart3.sprite = emptyHeart;
                 heart4.sprite = emptyHeart;
                 heart5.sprite = emptyHeart;
+                heart6.sprite = emptyHeart;
+                heart7.sprite = emptyHeart;
+                heart8.sprite = emptyHeart;
+                heart9.sprite = emptyHeart;
+                heart10.sprite = emptyHeart;
                 break;
             // If health is 3
             case 3:
@@ -428,6 +611,11 @@ public class AdventurePlayer : MonoBehaviour
                 heart3.sprite = fullHeart;
                 heart4.sprite = emptyHeart;
                 heart5.sprite = emptyHeart;
+                heart6.sprite = emptyHeart;
+                heart7.sprite = emptyHeart;
+                heart8.sprite = emptyHeart;
+                heart9.sprite = emptyHeart;
+                heart10.sprite = emptyHeart;
                 break;
             // If health is 4
             case 4:
@@ -436,6 +624,11 @@ public class AdventurePlayer : MonoBehaviour
                 heart3.sprite = fullHeart;
                 heart4.sprite = fullHeart;
                 heart5.sprite = emptyHeart;
+                heart6.sprite = emptyHeart;
+                heart7.sprite = emptyHeart;
+                heart8.sprite = emptyHeart;
+                heart9.sprite = emptyHeart;
+                heart10.sprite = emptyHeart;
                 break;
             // If health is 5
             case 5:
@@ -444,6 +637,76 @@ public class AdventurePlayer : MonoBehaviour
                 heart3.sprite = fullHeart;
                 heart4.sprite = fullHeart;
                 heart5.sprite = fullHeart;
+                heart6.sprite = emptyHeart;
+                heart7.sprite = emptyHeart;
+                heart8.sprite = emptyHeart;
+                heart9.sprite = emptyHeart;
+                heart10.sprite = emptyHeart;
+                break;
+            // If health is 6
+            case 6:
+                heart1.sprite = fullHeart;
+                heart2.sprite = fullHeart;
+                heart3.sprite = fullHeart;
+                heart4.sprite = fullHeart;
+                heart5.sprite = fullHeart;
+                heart6.sprite = fullHeart;
+                heart7.sprite = emptyHeart;
+                heart8.sprite = emptyHeart;
+                heart9.sprite = emptyHeart;
+                heart10.sprite = emptyHeart;
+                break;
+            // If health is 7
+            case 7:
+                heart1.sprite = fullHeart;
+                heart2.sprite = fullHeart;
+                heart3.sprite = fullHeart;
+                heart4.sprite = fullHeart;
+                heart5.sprite = fullHeart;
+                heart6.sprite = fullHeart;
+                heart7.sprite = fullHeart;
+                heart8.sprite = emptyHeart;
+                heart9.sprite = emptyHeart;
+                heart10.sprite = emptyHeart;
+                break;
+            // If health is 8
+            case 8:
+                heart1.sprite = fullHeart;
+                heart2.sprite = fullHeart;
+                heart3.sprite = fullHeart;
+                heart4.sprite = fullHeart;
+                heart5.sprite = fullHeart;
+                heart6.sprite = fullHeart;
+                heart7.sprite = fullHeart;
+                heart8.sprite = fullHeart;
+                heart9.sprite = emptyHeart;
+                heart10.sprite = emptyHeart;
+                break;
+            // If health is 9
+            case 9:
+                heart1.sprite = fullHeart;
+                heart2.sprite = fullHeart;
+                heart3.sprite = fullHeart;
+                heart4.sprite = fullHeart;
+                heart5.sprite = fullHeart;
+                heart6.sprite = fullHeart;
+                heart7.sprite = fullHeart;
+                heart8.sprite = fullHeart;
+                heart9.sprite = fullHeart;
+                heart10.sprite = emptyHeart;
+                break;
+            // If health is 10
+            case 10:
+                heart1.sprite = fullHeart;
+                heart2.sprite = fullHeart;
+                heart3.sprite = fullHeart;
+                heart4.sprite = fullHeart;
+                heart5.sprite = fullHeart;
+                heart6.sprite = fullHeart;
+                heart7.sprite = fullHeart;
+                heart8.sprite = fullHeart;
+                heart9.sprite = fullHeart;
+                heart10.sprite = fullHeart;
                 break;
         }
 	}

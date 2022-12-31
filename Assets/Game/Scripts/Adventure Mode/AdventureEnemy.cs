@@ -54,8 +54,8 @@ public class AdventureEnemy : MonoBehaviour
 
 		// --Difficulty Settings--
 		if (Settings.difficulty == 1) {
-			// Set distance enemy will attack from to 0.5
-    		distance = 0.8f; 
+			// Set distance enemy will attack from to 0.4
+    		distance = 0.4f; 
 			// Set wandering velocity multiplier to 0.3
 			wanderSpeed = 0.3f;
 			// Set chasing velocity multiplier to 0.8
@@ -64,8 +64,8 @@ public class AdventureEnemy : MonoBehaviour
 			chanceToDrop = 0.45;
 			//
 		} else if (Settings.difficulty == 3) {
-			// Set distance enemy will attack from to 1.5
-    		distance = 1.2f; 
+			// Set distance enemy will attack from to 0.8
+    		distance = 0.8f; 
 			// Set wandering velocity multiplier to 0.7
 			wanderSpeed = 0.7f;
 			// Set chasing velocity multiplier to 1.2
@@ -73,8 +73,8 @@ public class AdventureEnemy : MonoBehaviour
 			// Set chance to drop rare item to 0.05 (5%)
 			chanceToDrop = 0.05;
 		} else {
-			// Set distance enemy will attack from to 1
-    		distance = 1f; 
+			// Set distance enemy will attack from to 0.6
+    		distance = 0.6f; 
 			// Set wandering velocity multiplier to 0.5
 			wanderSpeed = 0.5f;
 			// Set chasing velocity multiplier to 1

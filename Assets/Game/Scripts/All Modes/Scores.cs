@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class for storing scores
 public class TotalScores 
 {
     // Controls time value
@@ -14,6 +15,7 @@ public class TotalScores
     public static int totalDefeats;
 }
 
+// Class for storing scores
 public class Scores 
 {
     // Controls time value
