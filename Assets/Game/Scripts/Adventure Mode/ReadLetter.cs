@@ -26,7 +26,7 @@ public class ReadLetter : MonoBehaviour
 		// Do nothing if the player hasn't been assigned or it was detroyed for some reason
 		if(player == null)
 			return;
-        open = false;
+        open = true;
         speed = Player.speed;
     }
 
@@ -65,7 +65,7 @@ public class ReadLetter : MonoBehaviour
             Destroy(newText);
             Player.speed = 0;
             letterObject = Instantiate<GameObject>(letterOpened);
-            letterObject.transform.position = this.transform.position;
+            letterObject.transform.position = player.transform.position;
             letterObject.GetComponent<Renderer>().sortingLayerID = this.GetComponent<Renderer>().sortingLayerID;
             letterObject.GetComponent<SpriteRenderer> ().sortingLayerName = "Layer 3";
             letterObject.GetComponent<SpriteRenderer> ().sortingOrder = 1;

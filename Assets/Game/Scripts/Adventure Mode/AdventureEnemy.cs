@@ -184,21 +184,48 @@ public class AdventureEnemy : MonoBehaviour
 			// Play death animation
 			anim.SetBool("Is_Dead", true);
 			// Destroy projectile
-            Destroy(other.gameObject, 0.1f);
+            Destroy(other.gameObject, 0f);
 			// Destroy enemy
-            Destroy(gameObject, 1f);
+            Destroy(gameObject, 0.5f);
 			// Add 1 to enemies defeated
 			Scores.defeats = Scores.defeats + 1;
 			// Drop an item on the ground where enemy died
 			 if(Random.value > chanceToDrop) { 
-				// high percent chance to drop only this item
-				GameObject newObject = Instantiate<GameObject>(prefabToSpawn);
-				newObject.transform.position = this.transform.position;
+				// High percent chance
+				// Spawn item
+				GameObject newObject1 = Instantiate<GameObject>(prefabToSpawn);
+				newObject1.transform.position = new Vector3(this.transform.position.x - 0.03f, this.transform.position.y, this.transform.position.z);
+				// Spawn item
+				GameObject newObject2 = Instantiate<GameObject>(prefabToSpawn);
+				newObject2.transform.position = this.transform.position;
+				// Spawn item
+				GameObject newObject3 = Instantiate<GameObject>(prefabToSpawn);
+				newObject3.transform.position = new Vector3(this.transform.position.x + 0.03f, this.transform.position.y, this.transform.position.z);
+				// Spawn item
+				GameObject newObject4 = Instantiate<GameObject>(prefabToSpawn);
+				newObject4.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.03f, this.transform.position.z);
+				// Spawn item
+				GameObject newObject5 = Instantiate<GameObject>(prefabToSpawn);
+				newObject5.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.03f, this.transform.position.z);
 			} else {
-				// low percent chance to drop a rare item as well
-				GameObject newObject = Instantiate<GameObject>(prefabToSpawn);
+				// Low percent chance
+				// Spawn item
+				GameObject newObject1 = Instantiate<GameObject>(prefabToSpawn);
+				newObject1.transform.position = new Vector3(this.transform.position.x - 0.03f, this.transform.position.y, this.transform.position.z);
+				// Spawn item
+				GameObject newObject2 = Instantiate<GameObject>(prefabToSpawn);
+				newObject2.transform.position = this.transform.position;
+				// Spawn item
+				GameObject newObject3 = Instantiate<GameObject>(prefabToSpawn);
+				newObject3.transform.position = new Vector3(this.transform.position.x + 0.03f, this.transform.position.y, this.transform.position.z);
+				// Spawn item
+				GameObject newObject4 = Instantiate<GameObject>(prefabToSpawn);
+				newObject4.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.03f, this.transform.position.z);
+				// Spawn item
+				GameObject newObject5 = Instantiate<GameObject>(prefabToSpawn);
+				newObject5.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.03f, this.transform.position.z);
+				// Spawn rare item
 				GameObject rareObject = Instantiate<GameObject>(rarePrefabToSpawn);
-				newObject.transform.position = this.transform.position;
 				rareObject.transform.position = this.transform.position;
 			}
         }

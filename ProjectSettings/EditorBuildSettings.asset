@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/Survival/Survival Scoreboard.unity
     guid: b97d07b3119e74048965f49d8418cb9a
+  - enabled: 1
+    path: Assets/Game/Scenes/Adventure/World.unity
+    guid: e32d8aa0a1aecb347b9acf8c3f30515b
   m_configObjects: {}

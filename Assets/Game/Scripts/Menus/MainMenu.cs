@@ -82,8 +82,8 @@ public class MainMenu : MonoBehaviour
         // Set difficulty to easy
         Settings.difficulty = 1;
         if(Settings.gameMode == "Adventure") {
-            // Locate and load scene called Level 1
-            SceneManager.LoadScene("Level 1");
+            // Locate and load scene called World
+            SceneManager.LoadScene("World");
         } else if(Settings.gameMode == "Survival") {
             // Locate and load scene called SurvivalMode
             SceneManager.LoadScene("Survival Mode");
@@ -101,8 +101,8 @@ public class MainMenu : MonoBehaviour
         // Set difficulty to normal
         Settings.difficulty = 2;
         if(Settings.gameMode == "Adventure") {
-            // Locate and load scene called Level 1
-            SceneManager.LoadScene("Level 1");
+            // Locate and load scene called World
+            SceneManager.LoadScene("World");
         } else if(Settings.gameMode == "Survival") {
             // Locate and load scene called SurvivalMode
             SceneManager.LoadScene("Survival Mode");
@@ -120,8 +120,8 @@ public class MainMenu : MonoBehaviour
         // Set difficulty to hard
         Settings.difficulty = 3;
         if(Settings.gameMode == "Adventure") {
-            // Locate and load scene called Level 1
-            SceneManager.LoadScene("Level 1");
+            // Locate and load scene called World
+            SceneManager.LoadScene("World");
         } else if(Settings.gameMode == "Survival") {
             // Locate and load scene called SurvivalMode
             SceneManager.LoadScene("Survival Mode");
