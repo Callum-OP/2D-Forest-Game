@@ -54,33 +54,38 @@ public class AdventureEnemy : MonoBehaviour
 
 		// --Difficulty Settings--
 		if (Settings.difficulty == 1) {
-			// Set distance enemy will attack from to 0.4
-    		distance = 0.4f; 
+			// Set distance enemy will attack from to 0.5
+    		distance = 0.5f; 
 			// Set wandering velocity multiplier to 0.3
 			wanderSpeed = 0.3f;
-			// Set chasing velocity multiplier to 0.8
-			chaseSpeed = 0.8f;
+			// Set chasing velocity multiplier to 0.9
+			chaseSpeed = 0.9f;
 			// Set chance to drop rare item to 0.45 (45%)
 			chanceToDrop = 0.45;
 			//
 		} else if (Settings.difficulty == 3) {
-			// Set distance enemy will attack from to 0.8
-    		distance = 0.8f; 
+			// Set distance enemy will attack from to 0.9
+    		distance = 0.9f; 
 			// Set wandering velocity multiplier to 0.7
 			wanderSpeed = 0.7f;
-			// Set chasing velocity multiplier to 1.2
-			chaseSpeed = 1.2f;
+			// Set chasing velocity multiplier to 1.3
+			chaseSpeed = 1.3f;
 			// Set chance to drop rare item to 0.05 (5%)
 			chanceToDrop = 0.05;
 		} else {
-			// Set distance enemy will attack from to 0.6
-    		distance = 0.6f; 
+			// Set distance enemy will attack from to 0.7
+    		distance = 0.7f; 
 			// Set wandering velocity multiplier to 0.5
 			wanderSpeed = 0.5f;
-			// Set chasing velocity multiplier to 1
-			chaseSpeed = 1f;
+			// Set chasing velocity multiplier to 1.1
+			chaseSpeed = 1.1f;
 			// Set chance to drop rare item to 0.2 (20%)
 			chanceToDrop = 0.20;
+		}
+
+		// If in survival mode
+		if (Settings.gameMode == "Survival") {
+			distance = 1000f;
 		}
 
 		// Set the waypoints to be followed
@@ -169,7 +174,7 @@ public class AdventureEnemy : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D other)
     {
 		// If hit by player projectile then enemy dies
-        if(other.gameObject.CompareTag("Bullet")) {
+        if (other.gameObject.CompareTag("Bullet")) {
 			// Stop the chase music
 			audio.Stop();
 			// Untag enemy so they can't deal damage
@@ -189,44 +194,44 @@ public class AdventureEnemy : MonoBehaviour
             Destroy(gameObject, 0.5f);
 			// Add 1 to enemies defeated
 			Scores.defeats = Scores.defeats + 1;
-			// Drop an item on the ground where enemy died
+			// Drop items spread out on the ground where enemy died
 			 if(Random.value > chanceToDrop) { 
 				// High percent chance
 				// Spawn item
 				GameObject newObject1 = Instantiate<GameObject>(prefabToSpawn);
-				newObject1.transform.position = new Vector3(this.transform.position.x - 0.03f, this.transform.position.y, this.transform.position.z);
+				newObject1.transform.position = new Vector3(this.transform.position.x - 0.03f, this.transform.position.y - 0.04f, this.transform.position.z);
 				// Spawn item
 				GameObject newObject2 = Instantiate<GameObject>(prefabToSpawn);
-				newObject2.transform.position = this.transform.position;
+				newObject2.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.04f, this.transform.position.z);
 				// Spawn item
 				GameObject newObject3 = Instantiate<GameObject>(prefabToSpawn);
-				newObject3.transform.position = new Vector3(this.transform.position.x + 0.03f, this.transform.position.y, this.transform.position.z);
+				newObject3.transform.position = new Vector3(this.transform.position.x + 0.03f, this.transform.position.y - 0.04f, this.transform.position.z);
 				// Spawn item
 				GameObject newObject4 = Instantiate<GameObject>(prefabToSpawn);
-				newObject4.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.03f, this.transform.position.z);
+				newObject4.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
 				// Spawn item
 				GameObject newObject5 = Instantiate<GameObject>(prefabToSpawn);
-				newObject5.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.03f, this.transform.position.z);
+				newObject5.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.06f, this.transform.position.z);
 			} else {
 				// Low percent chance
 				// Spawn item
 				GameObject newObject1 = Instantiate<GameObject>(prefabToSpawn);
-				newObject1.transform.position = new Vector3(this.transform.position.x - 0.03f, this.transform.position.y, this.transform.position.z);
+				newObject1.transform.position = new Vector3(this.transform.position.x - 0.03f, this.transform.position.y - 0.04f, this.transform.position.z);
 				// Spawn item
 				GameObject newObject2 = Instantiate<GameObject>(prefabToSpawn);
-				newObject2.transform.position = this.transform.position;
+				newObject2.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.04f, this.transform.position.z);
 				// Spawn item
 				GameObject newObject3 = Instantiate<GameObject>(prefabToSpawn);
-				newObject3.transform.position = new Vector3(this.transform.position.x + 0.03f, this.transform.position.y, this.transform.position.z);
+				newObject3.transform.position = new Vector3(this.transform.position.x + 0.03f, this.transform.position.y - 0.04f, this.transform.position.z);
 				// Spawn item
 				GameObject newObject4 = Instantiate<GameObject>(prefabToSpawn);
-				newObject4.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.03f, this.transform.position.z);
+				newObject4.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
 				// Spawn item
 				GameObject newObject5 = Instantiate<GameObject>(prefabToSpawn);
-				newObject5.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.03f, this.transform.position.z);
+				newObject5.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.06f, this.transform.position.z);
 				// Spawn rare item
 				GameObject rareObject = Instantiate<GameObject>(rarePrefabToSpawn);
-				rareObject.transform.position = this.transform.position;
+				rareObject.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.04f, this.transform.position.z);
 			}
         }
     }

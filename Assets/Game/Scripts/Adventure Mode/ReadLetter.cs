@@ -26,8 +26,13 @@ public class ReadLetter : MonoBehaviour
 		// Do nothing if the player hasn't been assigned or it was detroyed for some reason
 		if(player == null)
 			return;
-        open = true;
         speed = Player.speed;
+        open = true;
+        letterObject = Instantiate<GameObject>(letterOpened);
+        letterObject.transform.position = player.transform.position;
+        letterObject.GetComponent<Renderer>().sortingLayerID = this.GetComponent<Renderer>().sortingLayerID;
+        letterObject.GetComponent<SpriteRenderer> ().sortingLayerName = "Layer 3";
+        letterObject.GetComponent<SpriteRenderer> ().sortingOrder = 1;
     }
 
     // Update is called once per frame
@@ -58,17 +63,17 @@ public class ReadLetter : MonoBehaviour
         if(Vector2.Distance(transform.position, player.position) <= 0.2){
             if (Input.GetKeyDown("r") && open == false) {
                 open = true;
+                letterObject = Instantiate<GameObject>(letterOpened);
+                letterObject.transform.position = player.transform.position;
+                letterObject.GetComponent<Renderer>().sortingLayerID = this.GetComponent<Renderer>().sortingLayerID;
+                letterObject.GetComponent<SpriteRenderer> ().sortingLayerName = "Layer 3";
+                letterObject.GetComponent<SpriteRenderer> ().sortingOrder = 1;
             } 
         }
 
         if (open == true) {
             Destroy(newText);
             Player.speed = 0;
-            letterObject = Instantiate<GameObject>(letterOpened);
-            letterObject.transform.position = player.transform.position;
-            letterObject.GetComponent<Renderer>().sortingLayerID = this.GetComponent<Renderer>().sortingLayerID;
-            letterObject.GetComponent<SpriteRenderer> ().sortingLayerName = "Layer 3";
-            letterObject.GetComponent<SpriteRenderer> ().sortingOrder = 1;
             if (Input.GetKeyDown("x") && open == true) {
                 Player.speed = speed;
                 Destroy(letterObject);

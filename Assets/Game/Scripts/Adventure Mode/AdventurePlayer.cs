@@ -368,7 +368,7 @@ public class AdventurePlayer : MonoBehaviour
             // Destroy other object
             other.gameObject.SetActive(false);
             // Add one hundred to the variable score
-			Scores.score = Scores.score + 1000;
+			Scores.score = Scores.score + 500;
             // Play coin pickup sound
             audio.clip = coinPickup;
             audio.Play();

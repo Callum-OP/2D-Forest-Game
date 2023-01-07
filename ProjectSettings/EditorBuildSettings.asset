@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/Adventure/World.unity
     guid: e32d8aa0a1aecb347b9acf8c3f30515b
+  - enabled: 1
+    path: Assets/Game/Scenes/Survival/Survival.unity
+    guid: 607517793470fc6489aa9b34c9d5d902
   m_configObjects: {}

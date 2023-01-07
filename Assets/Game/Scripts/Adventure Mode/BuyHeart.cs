@@ -59,7 +59,7 @@ public class BuyHeart : MonoBehaviour
                 if (Player.maxHealth < 10) {
                     if (Scores.score >= 500) {
                         GameObject buyObject = Instantiate<GameObject>(itemToBuy);
-                        buyObject.transform.position = player.transform.position;
+                        buyObject.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 0.1f, player.transform.position.z);
                         Destroy(newText);
                         Player.maxHealth = Player.maxHealth + 1;
                         Scores.score = Scores.score - 500;

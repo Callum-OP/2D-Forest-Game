@@ -86,7 +86,7 @@ public class MainMenu : MonoBehaviour
             SceneManager.LoadScene("World");
         } else if(Settings.gameMode == "Survival") {
             // Locate and load scene called SurvivalMode
-            SceneManager.LoadScene("Survival Mode");
+            SceneManager.LoadScene("Survival");
         }
         // Destroy canvas
         Destroy(this.gameObject,0.03f);
@@ -105,7 +105,7 @@ public class MainMenu : MonoBehaviour
             SceneManager.LoadScene("World");
         } else if(Settings.gameMode == "Survival") {
             // Locate and load scene called SurvivalMode
-            SceneManager.LoadScene("Survival Mode");
+            SceneManager.LoadScene("Survival");
         }
         // Destroy canvas
         Destroy(this.gameObject,0.03f);
@@ -124,7 +124,7 @@ public class MainMenu : MonoBehaviour
             SceneManager.LoadScene("World");
         } else if(Settings.gameMode == "Survival") {
             // Locate and load scene called SurvivalMode
-            SceneManager.LoadScene("Survival Mode");
+            SceneManager.LoadScene("Survival");
         }
         // Destroy canvas
         Destroy(this.gameObject,0.03f);
