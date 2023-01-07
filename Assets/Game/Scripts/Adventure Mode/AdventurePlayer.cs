@@ -175,11 +175,7 @@ public class AdventurePlayer : MonoBehaviour
         // Add one to the level count value
         Scores.level = Scores.level + 1;
         // Set amount of gems to get
-        if(Scores.level == 1) {
-            Scores.gemsToGet = 3;
-        } else {
-            Scores.gemsToGet = Scores.gemsToGet + 2;
-        }
+        Scores.gemsToGet = 18;
 
         // Set up the values for the User Interface
 		SetHealthText();
@@ -718,12 +714,20 @@ public class AdventurePlayer : MonoBehaviour
         // Display current Scores.score
 		scoreText.text = Scores.score.ToString();
 	}
-    // Used to set the text in the UI to the current level number
+    // Used to set the text in the UI to display information relevent to mode
     void SetLevelText()
 	{
-        // Display current level
-		levelText.text = "Level " + Scores.level.ToString();
-	}
+        if (Settings.gameMode == "Levels") {
+            // Display current level
+            levelText.text = "Level " + Scores.level.ToString();
+        } else if (Settings.gameMode == "Survival") {
+            // Display current time survived
+            levelText.text = "Survived " + Scores.time.ToString() + " seconds";
+        } else {
+            // Display nothing
+            levelText.text = "";
+        }
+    }
     // Used to set the text in the UI to the correct number of gems collected and needed
     void SetGemsText()
     {
