@@ -26,7 +26,7 @@ public class AdventureScoreboard : MonoBehaviour
 		timeText.text = "Seconds Taken: " + Scores.time.ToString();
 
         // Display enemies defeated
-		defeatsText.text = "Enemies Defeated: " + Scores.defeats.ToString();
+		defeatsText.text = "Enemies Killed: " + Scores.defeats.ToString();
 
         // Display hearts used
 		heartsText.text = "Hearts Used: " + Scores.hearts.ToString();

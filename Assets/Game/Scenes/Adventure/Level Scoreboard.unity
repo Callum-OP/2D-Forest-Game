@@ -2228,7 +2228,6 @@ GameObject:
   - component: {fileID: 1344912369}
   - component: {fileID: 1344912368}
   - component: {fileID: 1344912367}
-  - component: {fileID: 1344912366}
   - component: {fileID: 1344912365}
   - component: {fileID: 1344912371}
   m_Layer: 5
@@ -2334,18 +2333,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1344912366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1344912364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c29d84b0d6685e44975b6c87f85ce09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1344912367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2529,8 +2516,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DeathScene, Assembly-CSharp
+      - m_Target: {fileID: 1344912371}
+        m_TargetAssemblyTypeName: AdventureScoreboard, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -2946,8 +2933,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1344912366}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 1344912371}
+        m_TargetAssemblyTypeName: AdventureScoreboard, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:

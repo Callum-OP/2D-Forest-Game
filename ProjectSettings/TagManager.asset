@@ -12,6 +12,8 @@ TagManager:
   - Fruit
   - Bullet
   - Chest
+  - SplashScreenMusic
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
