@@ -122,7 +122,7 @@ public class EnemyDroneController : MonoBehaviour
 			// Play death animation
 			anim.SetBool("Is_Dead", true);
 			// Destroy projectile
-            Destroy(other.gameObject, 0f);
+            Destroy(other.gameObject, 0.1f);
 			// Destroy enemy
             Destroy(gameObject, 0.5f);
 			// Add 1 to enemies defeated

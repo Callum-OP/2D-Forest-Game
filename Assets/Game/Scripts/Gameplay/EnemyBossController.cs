@@ -87,7 +87,7 @@ public class EnemyBossController : MonoBehaviour
 		// --Difficulty Settings--
 		if (Settings.difficulty == 1) {
 			// Set distance enemy will attack from to 5
-    		distance = 10f; 
+    		distance = 5f; 
 			// Set wandering velocity multiplier to 1
 			wanderSpeed = 1f;
             // Set the time it takes to create projectile to 1.5
@@ -99,7 +99,7 @@ public class EnemyBossController : MonoBehaviour
 			//
 		} else if (Settings.difficulty == 3) {
 			// Set distance enemy will attack from to 5
-    		distance = 10f; 
+    		distance = 5f; 
 			// Set wandering velocity multiplier to 2
 			wanderSpeed = 2f;
             // Set the time it takes to create projectile to 0.5
@@ -110,7 +110,7 @@ public class EnemyBossController : MonoBehaviour
             shootSpeed = 0.9f;
 		} else {
 			// Set distance enemy will attack from to 5
-    		distance = 10f; 
+    		distance = 5f; 
 			// Set wandering velocity multiplier to 1.5
 			wanderSpeed = 1.5f;
             // Set the time it takes to create projectile to 1
