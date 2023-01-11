@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3214631687008135739}
   - component: {fileID: 4247264807916135259}
   - component: {fileID: 5101557248246397876}
+  - component: {fileID: 4982844302477569161}
   m_Layer: 0
   m_Name: Gem
   m_TagString: Gem
@@ -115,7 +116,7 @@ PolygonCollider2D:
       - {x: 0.035, y: 0.035}
 --- !u!95 &5101557248246397876
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -128,7 +129,21 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &4982844302477569161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3214631687008135740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044941515f9893d4bb808a81a615470b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}

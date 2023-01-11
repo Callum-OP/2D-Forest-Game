@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2827132705685274719}
   - component: {fileID: 2827132705685274702}
   - component: {fileID: 2827132705685274689}
+  - component: {fileID: 3582030647086132389}
   m_Layer: 20
   m_Name: BossGolem
   m_TagString: Enemy
@@ -277,6 +278,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3582030647086132389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2827132705685274688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044941515f9893d4bb808a81a615470b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!1 &2827132706560627772
 GameObject:
   m_ObjectHideFlags: 0

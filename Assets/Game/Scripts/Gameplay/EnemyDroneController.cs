@@ -18,7 +18,7 @@ public class EnemyDroneController : MonoBehaviour
 	// Int used for probability of dropping rare prefab
 	private double chanceToDrop;
 
-	// Controls animation of player
+	// Controls animation of enemy
     private Animator anim;
     // Tells script there is a rigidbody, we can use variable rb to reference it in further script
     Rigidbody2D rb;

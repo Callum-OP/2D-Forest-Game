@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 384627638879530252}
   - component: {fileID: 384627638879530258}
   - component: {fileID: 1244073495076055868}
+  - component: {fileID: 4063009889983074946}
   m_Layer: 20
   m_Name: BossDrone
   m_TagString: Enemy
@@ -268,6 +269,19 @@ MonoBehaviour:
   chaseSpeed: 0
   rarePrefabToSpawn: {fileID: 118949022301615047, guid: 092cc2359bc392b42b95ec0a06e4465b,
     type: 3}
+--- !u!114 &4063009889983074946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384627638879530259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044941515f9893d4bb808a81a615470b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!1 &384627639884446063
 GameObject:
   m_ObjectHideFlags: 0

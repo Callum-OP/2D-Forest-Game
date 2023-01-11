@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 8482009657198632250}
   - component: {fileID: 8482009657198632251}
   - component: {fileID: 8482009657198632228}
+  - component: {fileID: -5059545940822625077}
   m_Layer: 20
   m_Name: Treant
   m_TagString: Enemy
@@ -394,3 +395,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-5059545940822625077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8482009657198632229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044941515f9893d4bb808a81a615470b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}

@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
 	// Bool used to determine if items have been spawned yet
 	private bool itemsDropped;
 
-	// Controls animation of player
+	// Controls animation of enemy
     private Animator anim;
     // Tells script there is a rigidbody, we can use variable rb to reference it in further script
     Rigidbody2D rb;
