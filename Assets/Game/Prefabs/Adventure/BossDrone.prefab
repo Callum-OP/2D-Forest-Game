@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 384627638879530258}
   - component: {fileID: 1244073495076055868}
   - component: {fileID: 4063009889983074946}
-  m_Layer: 20
+  m_Layer: 8
   m_Name: BossDrone
   m_TagString: Enemy
   m_Icon: {fileID: 0}

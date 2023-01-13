@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2827132705685274702}
   - component: {fileID: 2827132705685274689}
   - component: {fileID: 3582030647086132389}
-  m_Layer: 20
+  m_Layer: 8
   m_Name: BossGolem
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -100,10 +100,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.006504208, y: -0.01264286}
+  m_Offset: {x: 0.0076802373, y: -0.01629138}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -114,7 +114,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.22335643, y: 0.2534294}
+  m_Size: {x: 0.31277907, y: 0.30391836}
   m_EdgeRadius: 0
 --- !u!50 &2827132705685274716
 Rigidbody2D:
@@ -147,7 +147,7 @@ Animator:
   m_GameObject: {fileID: 2827132705685274688}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 397188bb2460a7a44979c878ae91c184, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6a09ca65a50d84640b10fde14d5d1a67, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -385,10 +385,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.020682544, y: -0.052160203}
+  m_Offset: {x: 0.027292669, y: -0.08897756}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -399,7 +399,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6583534, y: 0.96341765}
+  m_Size: {x: 0.57116675, y: 0.79896283}
   m_EdgeRadius: 0
 --- !u!114 &6582715199755777984
 MonoBehaviour:

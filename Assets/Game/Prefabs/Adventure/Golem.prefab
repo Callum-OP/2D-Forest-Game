@@ -94,10 +94,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.004994631, y: -0.062919885}
+  m_Offset: {x: 0.007477671, y: -0.06421924}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -108,7 +108,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.56047434, y: 0.80123895}
+  m_Size: {x: 0.48409247, y: 0.65937436}
   m_EdgeRadius: 0
 --- !u!114 &5068803559042963226
 MonoBehaviour:
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 4195524527846760601}
   - component: {fileID: 4195524527846760603}
   - component: {fileID: -624392398484093160}
-  m_Layer: 20
+  m_Layer: 8
   m_Name: Golem
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -222,10 +222,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.004634857, y: -0.016153336}
+  m_Offset: {x: -0.009623766, y: -0.019895017}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -236,7 +236,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16165638, y: 0.18800354}
+  m_Size: {x: 0.30134487, y: 0.27530873}
   m_EdgeRadius: 0
 --- !u!50 &4195524527846760582
 Rigidbody2D:

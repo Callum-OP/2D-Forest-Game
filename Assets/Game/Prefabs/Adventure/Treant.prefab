@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 8482009657198632251}
   - component: {fileID: 8482009657198632228}
   - component: {fileID: -5059545940822625077}
-  m_Layer: 20
+  m_Layer: 8
   m_Name: Treant
   m_TagString: Enemy
   m_Icon: {fileID: 0}

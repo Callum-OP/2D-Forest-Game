@@ -18,6 +18,10 @@ public class Player {
     public static int health;
     // Store max health value
     public static int maxHealth;
+    // Store arrows value
+    public static int arrows;
+    // Store max arrows value
+    public static int maxArrows;
 }
 
 // Class for managing the player and user interface
@@ -38,6 +42,11 @@ public class PlayerController : MonoBehaviour
     // Sprites used to change the display of the hearts in the UI
     public Sprite fullHeart;
     public Sprite emptyHeart;
+
+    // Image used beside arrow text
+    public Image arrowImage;
+    // Controls the displayed arrow text
+    public TextMeshProUGUI arrowText;
 
     // Image used beside score text
     public Image scoreImage;
@@ -81,13 +90,42 @@ public class PlayerController : MonoBehaviour
     public int health;
     // Controls max health value
     public int maxHealth;
+    // Controls arrows value
+    private int arrows;
+    // Controls max arrows value
+    private int maxArrows;
     // Tells script there is a rigidbody, we can use variable rb to reference it in further script
     Rigidbody2D rb;
     // Tells script there is a sprite renderer
     SpriteRenderer sr;
     // Used to add to time value
     private float levelTime;
+    // The time that user must press second key within to double tap
+    private float tapSpeed = 0.5f;
 
+    [Header("Sprint Settings")]
+    // Controls being able to double tap arrow keys to sprint
+    private float lastRTapTime = 0;
+    private float lastLTapTime = 0;
+    private float lastUTapTime = 0;
+    private float lastDTapTime = 0;
+    private bool DoubleTapH;
+    private bool DoubleTapV;
+
+    [Header("Attack Settings")]
+    // Controls being able to double tap space for ranged attack
+    private float lastAttackTapTime = 0;
+    private bool DoubleTapAttack;
+    // Controls single tap melee attacks
+    public float attackTime;
+    public float startTimeAttack;
+    public Transform attackLocation;
+    public float attackRange;
+    public LayerMask enemies;
+    // Used to store time of when damage object last spawned
+    private float timeOfLastAttack;
+
+    [Header("Direction Settings")]
     // Values for what direction player should be facing
     private bool faceUp = false;
     private bool faceDown = false;
@@ -123,7 +161,7 @@ public class PlayerController : MonoBehaviour
         // Set time of last spawned projectile
         timeOfLastSpawn =- creationRate;
 
-        //-- Difficulty settings
+        // --Difficulty Settings--
         if (Settings.difficulty == 1) {
             // Set the speed value to 1.1
             speed = 1.1f;
@@ -132,8 +170,11 @@ public class PlayerController : MonoBehaviour
             health = maxHealth;
             // Set the time it takes to create projectile to 1
             creationRate = 0.5f;
-            //Set the speed projectile will travel at to 3.5
+            // Set the speed projectile will travel at to 3.5
             shootSpeed = 3.5f;
+            // Set number of max arrows
+            maxArrows = 10;
+            arrows = maxArrows;
         } else if (Settings.difficulty == 3) {
             // Set the speed value to 1
             speed = 1f;
@@ -142,8 +183,11 @@ public class PlayerController : MonoBehaviour
             health = maxHealth;
             // Set the time it takes to create projectile to 1.5
             creationRate = 1.5f;
-            //Set the speed projectile will travel at to 2.5
+            // Set the speed projectile will travel at to 2.5
             shootSpeed = 2.5f;
+            // Set number of max arrows
+            maxArrows = 5;
+            arrows = maxArrows;
         } else {
             // Set the speed value to 1
             speed = 1f;
@@ -152,33 +196,31 @@ public class PlayerController : MonoBehaviour
             health = maxHealth;
             // Set the time it takes to create projectile to 1
             creationRate = 1f;
-            //Set the speed projectile will travel at to 3
+            // Set the speed projectile will travel at to 3
             shootSpeed = 3f;
+            // Set number of max arrows
+            maxArrows = 5;
+            arrows = maxArrows;
         }
 
+        // --Global Details--
         // Store player information globally
         Player.speed = speed;
         Player.maxHealth = maxHealth;
         Player.creationRate = creationRate;
         Player.shootSpeed = shootSpeed;
-        Player.maxHealth = maxHealth;
-
-        // --Scoreboard and game details--
-        // Set the score value to zero
+        Player.maxArrows = maxArrows;
+        Player.arrows = arrows;
+        // Strore scores information globally
 		Scores.score = 0;
-        // Set the gems value to zero
         Scores.gems = 0;
-        // Set the time value to zero
         Scores.time = 0;
-        // Set the hearts used value to zero
         Scores.hearts = 0;
-        // Add one to the level count value
         Scores.level = Scores.level + 1;
-        // Set amount of gems to get
         Scores.gemsToGet = 20;
-
         // Set up the values for the User Interface
 		SetHealthText();
+        SetArrowsText();
 		SetScoreText();
         SetGemsText();
         SetLevelText();
@@ -187,13 +229,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Update values for player
+        // --Player Details--
+        // Update values for player based on global details
         speed = Player.speed;
         maxHealth = Player.maxHealth;
         creationRate = Player.creationRate;
         shootSpeed = Player.shootSpeed;
-        maxHealth = Player.maxHealth;
-
+        maxArrows = Player.maxArrows;
+        arrows = Player.arrows;
         // Set the current level time
         levelTime += Time.deltaTime;
         // Show the time taken so far in seconds
@@ -202,22 +245,66 @@ public class PlayerController : MonoBehaviour
         float xMove = 0;
         float zMove = 0;
 
+        // --Sprinting Functionality--
+        // Detect double taps of each arrow key
+        if(Input.GetKeyDown(KeyCode.RightArrow)){
+            if((Time.time - lastRTapTime) < tapSpeed){
+                DoubleTapH = true;
+            } else {
+                DoubleTapH = false;
+            }
+            lastRTapTime = Time.time;
+        }
+        if(Input.GetKeyDown(KeyCode.LeftArrow)){
+            if((Time.time - lastLTapTime) < tapSpeed){
+                DoubleTapH = true;
+            } else {
+                DoubleTapH = false;
+            }
+            lastLTapTime = Time.time;
+        }
+        if(Input.GetKeyDown(KeyCode.UpArrow)){
+            if((Time.time - lastUTapTime) < tapSpeed){
+                DoubleTapV = true;
+            } else {
+                DoubleTapV = false;
+            }
+            lastUTapTime = Time.time;
+        }
+        if(Input.GetKeyDown(KeyCode.DownArrow)){
+            if((Time.time - lastDTapTime) < tapSpeed){
+                DoubleTapV = true;
+            } else {
+                DoubleTapV = false;
+            }
+            lastDTapTime = Time.time;
+        }
+
+        // --Movement Functionality--
         // Getting input value from arrow keys
         // Using if statement so user can not move diagonally only horizontal or vertical vertical
         if (Input.GetAxisRaw("Horizontal") != 0) {
             // Right arrow key changes value to 1, left arrow key changes value to -1
             xMove = Input.GetAxisRaw("Horizontal");
             zMove = 0;
+            // If arrow key double tapped increase speed
+            if (DoubleTapH) {
+                speed = speed * 1.5f;
+            }
         } 
         if (Input.GetAxisRaw("Vertical") != 0) {
             // Up arrow key changes value to 1, down arrow key changes value to -1
             zMove = Input.GetAxisRaw("Vertical");
             xMove = 0;
+            // If arrow key double tapped increase speed
+            if (DoubleTapV) {
+                speed = speed * 1.5f;
+            }
         }
-
         // Creates velocity in direction of value equal to arrow keypress
         rb.velocity = new Vector3(xMove, zMove) * speed;
 
+        // --Movement Animation--
         // Set which direction the character should be facing
         // And set animation value for if moving sideways
         if (xMove == 1) {
@@ -279,6 +366,7 @@ public class PlayerController : MonoBehaviour
             this.gameObject.transform.localScale = new Vector3(-1, 1, 1);
         }
 
+        // --Attack Functionality--
         // Value for deciding the direction to shoot
         Vector2 shootDirection = new Vector2(0f,0f);
 
@@ -299,8 +387,19 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("Horizontal", hf);
         anim.SetFloat("Vertical", vf);
 
-        // Fire projectile in a direction
-        if(Input.GetKey(keyToPress) && Time.time >= timeOfLastSpawn + creationRate) {
+        // Detect double taps of key to press
+        if(Input.GetKeyDown(keyToPress)){
+            if((Time.time - lastAttackTapTime) < tapSpeed){
+                DoubleTapAttack = true;
+            } else {
+                DoubleTapAttack = false;
+            }
+            lastAttackTapTime = Time.time;
+        }
+
+        // Ranged attacks that fire projectile in a direction
+        if(Input.GetKey(keyToPress) && Time.time >= timeOfLastSpawn + creationRate && DoubleTapAttack == true && arrows > 0) {
+            Debug.Log("Double tap");
             Vector2 actualBulletDirection = true ? (Vector2)(Quaternion.Euler(0, 0, transform.eulerAngles.z) * shootDirection) : shootDirection;
             // Create the projectile and place it where player is
             GameObject newObject = Instantiate<GameObject>(prefabToSpawn);
@@ -315,23 +414,57 @@ public class PlayerController : MonoBehaviour
             }
             // Set the time projectile was last spawned
             timeOfLastSpawn = Time.time;
+            arrows = arrows - 1;
         } 
 
-        // Set whether character is attacking or not
-        // And give enough time for attack animation to play
-        if (Input.GetKey(keyToPress) && Time.time <= timeOfLastSpawn + 0.3) {
-            anim.SetBool("Is_attacking", true);
-        } else {
-            anim.SetBool("Is_attacking", false);
+        if (attackTime <= 0) {
+            attackTime = startTimeAttack;
         }
 
+        // Melee attacks that damage nearby enemies
+        if(Input.GetKey(keyToPress) && attackTime <= 0 && DoubleTapAttack == false) {
+            Debug.Log("Single tap");
+            anim.SetBool("Is_Attacking", true);
+            Collider2D[] damage = Physics2D.OverlapCircleAll( attackLocation.position, attackRange, enemies );
+            for (int i = 0; i < damage.Length; i++)
+            {
+                // Only damage enemy once every second
+                if (Time.time >= timeOfLastAttack + 1) {
+                    // Create the projectile and place it where player is
+                    GameObject damageObject = Instantiate<GameObject>(prefabToSpawn);
+                    damageObject.transform.position = damage[i].transform.position;
+                    timeOfLastAttack = Time.time;
+                }
+
+            }
+        } else {
+            attackTime -= Time.deltaTime;
+            anim.SetBool("Is_Attacking", false);
+        }
+
+        // --Attack Animation--
+        // Set whether character is attacking or not
+        // And give enough time for attack animation to play
+        if (Input.GetKey(keyToPress) && Time.time <= timeOfLastSpawn + 0.3 || Input.GetKey(keyToPress) && attackTime <= 0) {
+            anim.SetBool("Is_Attacking", true);
+            if (DoubleTapAttack) {
+                anim.SetFloat("Is_Ranged", 1);
+            } else {
+                anim.SetFloat("Is_Ranged", 0);
+            }
+        } else {
+            anim.SetBool("Is_Attacking", false);
+            anim.SetFloat("Is_Ranged", 0.5f);
+        }
         // Keep values for the User Interface up to date
 		SetHealthText();
+        SetArrowsText();
 		SetScoreText();
         SetGemsText();
         SetLevelText();
     }
 
+    // --Collisions With Triggers--
     // When player collides with other objects
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -415,6 +548,7 @@ public class PlayerController : MonoBehaviour
 			SetHealthText();
         }
     }
+    // --Update UI And Variables--
     // Used to set the text in the UI to the correct amount of health player has
     void SetHealthText()
 	{
@@ -565,7 +699,6 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-            
         // Change hearts in UI based on current health
         switch (health) {
             // If health is 0
@@ -720,6 +853,13 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 	}
+    // Used to set the text in the UI to the number of arrows user can fire before cooldown
+    void SetArrowsText() {
+        // Update current arrows stored
+        Player.arrows = arrows;
+        // Change arrows text in UI based on current arrows
+		arrowText.text = arrows.ToString() + "/" + maxArrows.ToString();
+    }
     // Used to set the text in the UI to the correct number of gold collected
     void SetScoreText()
 	{
@@ -757,6 +897,7 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("Level Scoreboard");
 		}
     }
+    
     // Used to indicate to user that player has taken damage
     IEnumerator Injured()
     {
@@ -765,7 +906,12 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         // Make player look normal again
         sr.color = Color.white;
-    }
+    }     
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackLocation.position, attackRange);
+    }
 }
 
