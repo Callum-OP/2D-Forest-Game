@@ -17,7 +17,6 @@ public class ReadLetter : MonoBehaviour
     private GameObject letterObject;
     private bool display;
     private bool open;
-    private float speed;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +25,6 @@ public class ReadLetter : MonoBehaviour
 		// Do nothing if the player hasn't been assigned or it was detroyed for some reason
 		if(player == null)
 			return;
-        speed = Player.speed;
         open = true;
         letterObject = Instantiate<GameObject>(letterOpened);
         letterObject.transform.position = player.transform.position;
@@ -73,9 +71,9 @@ public class ReadLetter : MonoBehaviour
 
         if (open == true) {
             Destroy(newText);
-            Player.speed = 0;
+            Time.timeScale = 0f;
             if (Input.GetKeyDown("x") && open == true) {
-                Player.speed = speed;
+                Time.timeScale = 1f;
                 Destroy(letterObject);
                 open = false;
             }
