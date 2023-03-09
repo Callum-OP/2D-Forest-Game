@@ -436,6 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 62821646705291970, guid: ff109be870a959d46ab0a564c3c817f1,
     type: 3}
+  rarePrefabToSpawn: {fileID: 0}
 --- !u!1 &78578402
 GameObject:
   m_ObjectHideFlags: 0
@@ -74080,6 +74081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 62821646705291970, guid: ff109be870a959d46ab0a564c3c817f1,
     type: 3}
+  rarePrefabToSpawn: {fileID: 0}
 --- !u!212 &118994049
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -74178,6 +74180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 62821646705291970, guid: ff109be870a959d46ab0a564c3c817f1,
     type: 3}
+  rarePrefabToSpawn: {fileID: 0}
 --- !u!212 &142569579
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -87058,6 +87061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 62821646705291970, guid: ff109be870a959d46ab0a564c3c817f1,
     type: 3}
+  rarePrefabToSpawn: {fileID: 0}
 --- !u!212 &2090301760
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -183,10 +183,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Hello fellow adventurer, I have heard about \nyour travels and believe
-    you are fit for a \nmission that I've grown too old to be able \nto complete.
-    There are many dungeons\nhidden in our world, find them and in each\nthere will
-    be a gem of great power, collect \nthem all and make me proud."
+  m_text: 'There are 20 gems hidden throughout the land and your aim is to collect
+    them all.
+
+
+    Movement: Use arrow or wasd keys to move and double tap arrow
+    keys to sprint
+
+
+    Combat: Use space bar for melee attack, double tap space
+    bar for ranged attack
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a9c32fd058b2d6545a895c55e8757cdf, type: 2}
   m_sharedMaterial: {fileID: 7097488696431963778, guid: a9c32fd058b2d6545a895c55e8757cdf,

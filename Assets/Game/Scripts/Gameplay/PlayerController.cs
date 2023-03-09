@@ -28,42 +28,8 @@ public class Player {
 public class PlayerController : MonoBehaviour
 {
     [Header("User Interface")]
-    // Images used for rendering the five hearts in the UI
-    public Image heart1;
-    public Image heart2;
-    public Image heart3;
-    public Image heart4;
-    public Image heart5;
-    public Image heart6;
-    public Image heart7;
-    public Image heart8;
-    public Image heart9;
-    public Image heart10;
-    // Sprites used to change the display of the hearts in the UI
-    public Sprite fullHeart;
-    public Sprite emptyHeart;
-
-    // Image used beside arrow text
-    public Image arrowImage;
-    // Controls the displayed arrow text
-    public TextMeshProUGUI arrowText;
-
-    // Image used beside score text
-    public Image scoreImage;
-    // Sprites used to display image beside score in UI
-    public Sprite scoreSprite;
-    // Controls the displayed score text
-    public TextMeshProUGUI scoreText;
-
-    // Image used beside gems text
-    public Image gemsImage;
-    // Sprites used to display image beside gems in UI
-    public Sprite gemsSprite;
-    // Controls the displayed gems text
-    public TextMeshProUGUI gemsText;
-
-    // Controls the current level text
-    public TextMeshProUGUI levelText;
+    // Reference user interface
+    public GameObject UserInterface;
 
     [Header("Audio Sounds")]
     // Sound when picking up coin
@@ -206,12 +172,13 @@ public class PlayerController : MonoBehaviour
         // --Global Details--
         // Store player information globally
         Player.speed = speed;
+        Player.health = maxHealth;
         Player.maxHealth = maxHealth;
         Player.creationRate = creationRate;
         Player.shootSpeed = shootSpeed;
         Player.maxArrows = maxArrows;
         Player.arrows = arrows;
-        // Strore scores information globally
+        // Store scores information globally
 		Scores.score = 0;
         Scores.gems = 0;
         Scores.time = 0;
@@ -219,11 +186,10 @@ public class PlayerController : MonoBehaviour
         Scores.level = Scores.level + 1;
         Scores.gemsToGet = 20;
         // Set up the values for the User Interface
-		SetHealthText();
-        SetArrowsText();
-		SetScoreText();
-        SetGemsText();
-        SetLevelText();
+		UserInterface.GetComponent<InGameUI>().SetHealthText();
+        UserInterface.GetComponent<InGameUI>().SetArrowsText();
+		UserInterface.GetComponent<InGameUI>().SetScoreText();
+        UserInterface.GetComponent<InGameUI>().SetGemsText();
     }
 
     // Update is called once per frame
@@ -414,6 +380,7 @@ public class PlayerController : MonoBehaviour
             }
             // Set the time projectile was last spawned
             timeOfLastSpawn = Time.time;
+            Player.arrows = arrows - 1;
             arrows = arrows - 1;
         } 
 
@@ -457,11 +424,11 @@ public class PlayerController : MonoBehaviour
             anim.SetFloat("Is_Ranged", 0.5f);
         }
         // Keep values for the User Interface up to date
-		SetHealthText();
-        SetArrowsText();
-		SetScoreText();
-        SetGemsText();
-        SetLevelText();
+		// The source of audio sounds
+        UserInterface.GetComponent<InGameUI>().SetHealthText();
+        UserInterface.GetComponent<InGameUI>().SetArrowsText();
+		UserInterface.GetComponent<InGameUI>().SetScoreText();
+        UserInterface.GetComponent<InGameUI>().SetGemsText();
     }
 
     // --Collisions With Triggers--
@@ -471,24 +438,26 @@ public class PlayerController : MonoBehaviour
         // Enemies will deal damage to player health
         if(other.gameObject.CompareTag("Enemy")) {
             // Remove ten from the variable health
-			health = health - 1;
+			Player.health = health - 1;
+            health = health - 1;
             // Play hurt sound
-            audio.clip = hurt;
-            audio.Play();
+            GetComponent<AudioSource>().clip = hurt;
+            GetComponent<AudioSource>().Play();
 			// Run the SetHealthText() function
-			SetHealthText();
+			UserInterface.GetComponent<InGameUI>().SetHealthText();
             // Run Injured() coroutine
             StartCoroutine(Injured());
         }
         // Enemies will deal damage to player health
         if(other.gameObject.CompareTag("EnemyBullet")) {
             // Remove ten from the variable health
-			health = health - 1;
+			Player.health = health - 1;
+            health = health - 1;
             // Play hurt sound
-            audio.clip = hurt;
-            audio.Play();
+            GetComponent<AudioSource>().clip = hurt;
+            GetComponent<AudioSource>().Play();
 			// Run the SetHealthText() function
-			SetHealthText();
+			UserInterface.GetComponent<InGameUI>().SetHealthText();
             // Run Injured() coroutine
             StartCoroutine(Injured());
             // Destroy projectile
@@ -501,10 +470,10 @@ public class PlayerController : MonoBehaviour
             // Add ten to the variable score
 			Scores.score = Scores.score + 10;
             // Play coin pickup sound
-            audio.clip = coinPickup;
-            audio.Play();
+            GetComponent<AudioSource>().clip = coinPickup;
+            GetComponent<AudioSource>().Play();
 			// Run the SetScoreText() function
-			SetScoreText();
+			UserInterface.GetComponent<InGameUI>().SetScoreText();
         }
         // Chests will give score to player
         if(other.gameObject.CompareTag("Chest")) {
@@ -513,10 +482,10 @@ public class PlayerController : MonoBehaviour
             // Add one hundred to the variable score
 			Scores.score = Scores.score + 100;
             // Play coin pickup sound
-            audio.clip = coinPickup;
-            audio.Play();
+            GetComponent<AudioSource>().clip = coinPickup;
+            GetComponent<AudioSource>().Play();
 			// Run the SetScoreText() function
-			SetScoreText();
+			UserInterface.GetComponent<InGameUI>().SetScoreText();
         }
         // Gems will be collected until none are left
         if(other.gameObject.CompareTag("Gem")) {
@@ -525,10 +494,10 @@ public class PlayerController : MonoBehaviour
             // Add one hundred to the variable score
 			Scores.gems = Scores.gems + 1;
             // Play gem pickup sound
-            audio.clip = gemPickup;
-            audio.Play();
+            GetComponent<AudioSource>().clip = gemPickup;
+            GetComponent<AudioSource>().Play();
             // Run the SetGemsText() function
-            SetGemsText();
+            UserInterface.GetComponent<InGameUI>().SetGemsText();
         }
         // Fruit will heal player health
         if(other.gameObject.CompareTag("Fruit")) {
@@ -541,361 +510,12 @@ public class PlayerController : MonoBehaviour
                 // Add 1 to hearts used value
                 Scores.hearts = Scores.hearts + 1;
                 // Play fruit pickup sound
-                audio.clip = fruitPickup;
-                audio.Play ();
+                GetComponent<AudioSource>().clip = fruitPickup;
+                GetComponent<AudioSource>().Play ();
             }
 			// Run the SetHealthText() function
-			SetHealthText();
+			UserInterface.GetComponent<InGameUI>().SetHealthText();
         }
-    }
-    // --Update UI And Variables--
-    // Used to set the text in the UI to the correct amount of health player has
-    void SetHealthText()
-	{
-        //  Set current health value stored in player class
-        Player.health = health;
-
-        // Change hearts in UI based on max health
-        switch (maxHealth) {
-            // If max health is 1
-            case 1:
-                // Show first heart
-                heart1.enabled = true;
-                heart2.enabled = false;
-                heart3.enabled = false;
-                heart4.enabled = false;
-                heart5.enabled = false;
-                heart6.enabled = false;
-                heart7.enabled = false;
-                heart8.enabled = false;
-                heart9.enabled = false;
-                heart10.enabled = false;
-                break;
-            // If max health is 2
-            case 2:
-                // Show first 2 hearts
-                heart1.enabled = true;
-                heart2.enabled = true;
-                heart3.enabled = false;
-                heart4.enabled = false;
-                heart5.enabled = false;
-                heart6.enabled = false;
-                heart7.enabled = false;
-                heart8.enabled = false;
-                heart9.enabled = false;
-                heart10.enabled = false;
-                break;
-            // If max health is 3
-            case 3:
-                // Show first 3 hearts
-                heart1.enabled = true;
-                heart2.enabled = true;
-                heart3.enabled = true;
-                heart4.enabled = false;
-                heart5.enabled = false;
-                heart6.enabled = false;
-                heart7.enabled = false;
-                heart8.enabled = false;
-                heart9.enabled = false;
-                heart10.enabled = false;
-                break;
-            // If max health is 4
-            case 4:
-                // Show first 4 hearts
-                heart1.enabled = true;
-                heart2.enabled = true;
-                heart3.enabled = true;
-                heart4.enabled = true;
-                heart5.enabled = false;
-                heart6.enabled = false;
-                heart7.enabled = false;
-                heart8.enabled = false;
-                heart9.enabled = false;
-                heart10.enabled = false;
-                break;
-            // If max health is 5
-            case 5:
-                // Show first 5 hearts
-                heart1.enabled = true;
-                heart2.enabled = true;
-                heart3.enabled = true;
-                heart4.enabled = true;
-                heart5.enabled = true;
-                heart6.enabled = false;
-                heart7.enabled = false;
-                heart8.enabled = false;
-                heart9.enabled = false;
-                heart10.enabled = false;
-                break;
-            // If max health is 6
-            case 6:
-                // Show first 6 hearts
-                heart1.enabled = true;
-                heart2.enabled = true;
-                heart3.enabled = true;
-                heart4.enabled = true;
-                heart5.enabled = true;
-                heart6.enabled = true;
-                heart7.enabled = false;
-                heart8.enabled = false;
-                heart9.enabled = false;
-                heart10.enabled = false;
-                break;
-            // If max health is 7
-            case 7:
-                // Show first 7 hearts
-                heart1.enabled = true;
-                heart2.enabled = true;
-                heart3.enabled = true;
-                heart4.enabled = true;
-                heart5.enabled = true;
-                heart6.enabled = true;
-                heart7.enabled = true;
-                heart8.enabled = false;
-                heart9.enabled = false;
-                heart10.enabled = false;
-                break;
-            // If max health is 8
-            case 8:
-                // Show first 8 hearts
-                heart1.enabled = true;
-                heart2.enabled = true;
-                heart3.enabled = true;
-                heart4.enabled = true;
-                heart5.enabled = true;
-                heart6.enabled = true;
-                heart7.enabled = true;
-                heart8.enabled = true;
-                heart9.enabled = false;
-                heart10.enabled = false;
-                break;
-            // If max health is 9
-            case 9:
-                // Show first 9 hearts
-                heart1.enabled = true;
-                heart2.enabled = true;
-                heart3.enabled = true;
-                heart4.enabled = true;
-                heart5.enabled = true;
-                heart6.enabled = true;
-                heart7.enabled = true;
-                heart8.enabled = true;
-                heart9.enabled = true;
-                heart10.enabled = false;
-                break;
-            // If max health is 10
-            case 10:
-                // Show all 10 hearts
-                heart1.enabled = true;
-                heart2.enabled = true;
-                heart3.enabled = true;
-                heart4.enabled = true;
-                heart5.enabled = true;
-                heart6.enabled = true;
-                heart7.enabled = true;
-                heart8.enabled = true;
-                heart9.enabled = true;
-                heart10.enabled = true;
-                break;
-        }
-
-        // Change hearts in UI based on current health
-        switch (health) {
-            // If health is 0
-            case 0:
-                // Display current health
-                heart1.sprite = emptyHeart;
-                heart2.sprite = emptyHeart;
-                heart3.sprite = emptyHeart;
-                heart4.sprite = emptyHeart;
-                heart5.sprite = emptyHeart;
-                heart6.sprite = emptyHeart;
-                heart7.sprite = emptyHeart;
-                heart8.sprite = emptyHeart;
-                heart9.sprite = emptyHeart;
-                heart10.sprite = emptyHeart;
-                // Reset gems to get
-                Scores.gemsToGet = 1;
-                // Reset level number
-                Scores.level = 0;
-                // Locate and load scene called Death Scene
-                SceneManager.LoadScene("Death Scene");
-                break;
-            // If health is 1
-            case 1:
-                heart1.sprite = fullHeart;
-                heart2.sprite = emptyHeart;
-                heart3.sprite = emptyHeart;
-                heart4.sprite = emptyHeart;
-                heart5.sprite = emptyHeart;
-                heart6.sprite = emptyHeart;
-                heart7.sprite = emptyHeart;
-                heart8.sprite = emptyHeart;
-                heart9.sprite = emptyHeart;
-                heart10.sprite = emptyHeart;
-                break;
-            // If health is 2
-            case 2:
-                heart1.sprite = fullHeart;
-                heart2.sprite = fullHeart;
-                heart3.sprite = emptyHeart;
-                heart4.sprite = emptyHeart;
-                heart5.sprite = emptyHeart;
-                heart6.sprite = emptyHeart;
-                heart7.sprite = emptyHeart;
-                heart8.sprite = emptyHeart;
-                heart9.sprite = emptyHeart;
-                heart10.sprite = emptyHeart;
-                break;
-            // If health is 3
-            case 3:
-                heart1.sprite = fullHeart;
-                heart2.sprite = fullHeart;
-                heart3.sprite = fullHeart;
-                heart4.sprite = emptyHeart;
-                heart5.sprite = emptyHeart;
-                heart6.sprite = emptyHeart;
-                heart7.sprite = emptyHeart;
-                heart8.sprite = emptyHeart;
-                heart9.sprite = emptyHeart;
-                heart10.sprite = emptyHeart;
-                break;
-            // If health is 4
-            case 4:
-                heart1.sprite = fullHeart;
-                heart2.sprite = fullHeart;
-                heart3.sprite = fullHeart;
-                heart4.sprite = fullHeart;
-                heart5.sprite = emptyHeart;
-                heart6.sprite = emptyHeart;
-                heart7.sprite = emptyHeart;
-                heart8.sprite = emptyHeart;
-                heart9.sprite = emptyHeart;
-                heart10.sprite = emptyHeart;
-                break;
-            // If health is 5
-            case 5:
-                heart1.sprite = fullHeart;
-                heart2.sprite = fullHeart;
-                heart3.sprite = fullHeart;
-                heart4.sprite = fullHeart;
-                heart5.sprite = fullHeart;
-                heart6.sprite = emptyHeart;
-                heart7.sprite = emptyHeart;
-                heart8.sprite = emptyHeart;
-                heart9.sprite = emptyHeart;
-                heart10.sprite = emptyHeart;
-                break;
-            // If health is 6
-            case 6:
-                heart1.sprite = fullHeart;
-                heart2.sprite = fullHeart;
-                heart3.sprite = fullHeart;
-                heart4.sprite = fullHeart;
-                heart5.sprite = fullHeart;
-                heart6.sprite = fullHeart;
-                heart7.sprite = emptyHeart;
-                heart8.sprite = emptyHeart;
-                heart9.sprite = emptyHeart;
-                heart10.sprite = emptyHeart;
-                break;
-            // If health is 7
-            case 7:
-                heart1.sprite = fullHeart;
-                heart2.sprite = fullHeart;
-                heart3.sprite = fullHeart;
-                heart4.sprite = fullHeart;
-                heart5.sprite = fullHeart;
-                heart6.sprite = fullHeart;
-                heart7.sprite = fullHeart;
-                heart8.sprite = emptyHeart;
-                heart9.sprite = emptyHeart;
-                heart10.sprite = emptyHeart;
-                break;
-            // If health is 8
-            case 8:
-                heart1.sprite = fullHeart;
-                heart2.sprite = fullHeart;
-                heart3.sprite = fullHeart;
-                heart4.sprite = fullHeart;
-                heart5.sprite = fullHeart;
-                heart6.sprite = fullHeart;
-                heart7.sprite = fullHeart;
-                heart8.sprite = fullHeart;
-                heart9.sprite = emptyHeart;
-                heart10.sprite = emptyHeart;
-                break;
-            // If health is 9
-            case 9:
-                heart1.sprite = fullHeart;
-                heart2.sprite = fullHeart;
-                heart3.sprite = fullHeart;
-                heart4.sprite = fullHeart;
-                heart5.sprite = fullHeart;
-                heart6.sprite = fullHeart;
-                heart7.sprite = fullHeart;
-                heart8.sprite = fullHeart;
-                heart9.sprite = fullHeart;
-                heart10.sprite = emptyHeart;
-                break;
-            // If health is 10
-            case 10:
-                heart1.sprite = fullHeart;
-                heart2.sprite = fullHeart;
-                heart3.sprite = fullHeart;
-                heart4.sprite = fullHeart;
-                heart5.sprite = fullHeart;
-                heart6.sprite = fullHeart;
-                heart7.sprite = fullHeart;
-                heart8.sprite = fullHeart;
-                heart9.sprite = fullHeart;
-                heart10.sprite = fullHeart;
-                break;
-        }
-	}
-    // Used to set the text in the UI to the number of arrows user can fire before cooldown
-    void SetArrowsText() {
-        // Update current arrows stored
-        Player.arrows = arrows;
-        // Change arrows text in UI based on current arrows
-		arrowText.text = arrows.ToString() + "/" + maxArrows.ToString();
-    }
-    // Used to set the text in the UI to the correct number of gold collected
-    void SetScoreText()
-	{
-        // Display image for score
-        scoreImage.sprite = scoreSprite;
-        // Display current Scores.score
-		scoreText.text = Scores.score.ToString();
-	}
-    // Used to set the text in the UI to display information relevent to mode
-    void SetLevelText()
-	{
-        if (Settings.gameMode == "Levels") {
-            // Display current level
-            levelText.text = "Level " + Scores.level.ToString();
-        } else if (Settings.gameMode == "Survival") {
-            // Display current time survived
-            levelText.text = "Survived " + Scores.time.ToString() + " seconds";
-        } else {
-            // Display nothing
-            levelText.text = "";
-        }
-    }
-    // Used to set the text in the UI to the correct number of gems collected and needed
-    void SetGemsText()
-    {
-        // Display image for score
-        gemsImage.sprite = gemsSprite;
-        // Display current Scores.score
-		gemsText.text = Scores.gems.ToString() + "/" + Scores.gemsToGet;
-        
-        // When gems is more than gems to get
-		if (Scores.gems >= Scores.gemsToGet) 
-		{
-            // Locate and load scene called Level Scoreboard
-            SceneManager.LoadScene("Level Scoreboard");
-		}
     }
     
     // Used to indicate to user that player has taken damage
