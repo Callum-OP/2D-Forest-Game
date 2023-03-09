@@ -506,6 +506,7 @@ public class PlayerController : MonoBehaviour
                 // Destroy other object
                 other.gameObject.SetActive(false);
                 // Add ten to the variable health
+                Player.health = health + 1;
                 health = health + 1;
                 // Add 1 to hearts used value
                 Scores.hearts = Scores.hearts + 1;
