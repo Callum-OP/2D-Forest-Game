@@ -187,12 +187,12 @@ MonoBehaviour:
     them all.
 
 
-    Movement: Use arrow or wasd keys to move and double tap arrow
-    keys to sprint
+    Beware the many enemies patrolling and be prepared to fight if
+    you get too close to them.
 
 
-    Combat: Use space bar for melee attack, double tap space
-    bar for ranged attack
+    Press the pause button or the tab key to access
+    the menu and view the controls.
 
 '
   m_isRightToLeft: 0
