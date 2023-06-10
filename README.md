@@ -7,6 +7,8 @@ The Player as well as enemies have animations for running in all four directions
 
 Background music plays during game time.
 
+Game features a user interface showing the current health, coins and arrows. Also has a menu which pauses the game and allows the player to either see the controls, quit the game or continue playing.
+
 I have yet to add sound effects play when coins, hearts and gems are picked up.
 
 Below is a list of the current modes available
@@ -30,7 +32,7 @@ Player is an average speed at moving and attacking.
 Enemies have a reasonable chance to drop hearts.
 
 ## Hard difficulty:
-Player has 5 hearts representing health.
+Player has 3 hearts representing health.
 Enemies deal 1 heart damage.
 Hearts heal the player for 1 heart.
 Coins will give 10 gold to the player.
