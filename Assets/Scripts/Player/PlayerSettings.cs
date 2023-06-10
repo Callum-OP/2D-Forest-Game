@@ -58,6 +58,8 @@ public class PlayerSettings : MonoBehaviour
         // Audio equals the audio source on the player
         audio = GetComponent<AudioSource>();
 
+        Scores.gameWon = false;
+
         // --Difficulty Settings--
         if (Settings.difficulty == 1) {
             // Set the speed value to 8
@@ -105,7 +107,6 @@ public class PlayerSettings : MonoBehaviour
         Scores.gems = 0;
         Scores.time = 0;
         Scores.hearts = 0;
-        Scores.level = Scores.level + 1;
         Scores.gemsToGet = 5;
 
         // Set up the values for the User Interface
@@ -150,20 +151,6 @@ public class PlayerSettings : MonoBehaviour
 			UserInterface.GetComponent<InGameUI>().SetHealthText();
             // Run Injured() coroutine
             StartCoroutine(Injured());
-        }
-        // Enemies will deal damage to player health
-        if(other.gameObject.CompareTag("EnemyBullet")) {
-            // Remove ten from the variable health
-			Player.health = Player.health - 1;
-            // Play hurt sound
-            GetComponent<AudioSource>().clip = hurt;
-            GetComponent<AudioSource>().Play();
-			// Run the SetHealthText() function
-			UserInterface.GetComponent<InGameUI>().SetHealthText();
-            // Run Injured() coroutine
-            StartCoroutine(Injured());
-            // Destroy projectile
-            Destroy(other.gameObject);
         }
         // Coins will give score to player
         if(other.gameObject.CompareTag("Coin")) {

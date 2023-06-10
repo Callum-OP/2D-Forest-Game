@@ -26,10 +26,10 @@ public class Scores
     public static int score;
     // Controls score value
     public static int gems;
-    // Controls amount of gems needed to win
+    // Controls amount of gems needed to progress
     public static int gemsToGet;
-    // Controls level count value
-    public static int level = 0;
+    // Controls whether the game is won or not
+    public static bool gameWon;
     // Controls defeats value
     public static int defeats;
 }

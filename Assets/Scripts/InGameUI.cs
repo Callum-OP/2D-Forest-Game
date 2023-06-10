@@ -215,12 +215,8 @@ public class InGameUI : MonoBehaviour
                 heart8.sprite = emptyHeart;
                 heart9.sprite = emptyHeart;
                 heart10.sprite = emptyHeart;
-                // Reset gems to get
-                Scores.gemsToGet = 1;
-                // Reset level number
-                Scores.level = 0;
                 // Locate and load scene called Death Scene
-                SceneManager.LoadScene("Death Scene");
+                SceneManager.LoadScene("Death");
                 break;
             // If health is 1
             case 1:
@@ -376,10 +372,10 @@ public class InGameUI : MonoBehaviour
 		gemsText.text = Scores.gems.ToString() + "/" + Scores.gemsToGet;
         
         // When gems is more than gems to get
-		if (Scores.gems >= Scores.gemsToGet) 
+		if (Scores.gameWon == true) 
 		{
             // Locate and load scene called Level Scoreboard
-            SceneManager.LoadScene("Level Scoreboard");
+            SceneManager.LoadScene("End");
 		}
     }
 }
