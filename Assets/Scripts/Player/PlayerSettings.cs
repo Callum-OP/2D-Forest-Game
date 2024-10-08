@@ -50,6 +50,9 @@ public class PlayerSettings : MonoBehaviour
     // Used to add to time value
     private float levelTime;
 
+    // Used to control when player can be damaged
+    private bool canDamage = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -114,6 +117,9 @@ public class PlayerSettings : MonoBehaviour
         UserInterface.GetComponent<InGameUI>().SetArrowsText();
 		UserInterface.GetComponent<InGameUI>().SetScoreText();
         UserInterface.GetComponent<InGameUI>().SetGemsText();
+
+        //Player can be damaged
+        canDamage = true;
     }
 
     // Update is called once per frame
@@ -138,11 +144,12 @@ public class PlayerSettings : MonoBehaviour
 
     // --Collisions With Triggers--
     // When player collides with other objects
-    private void OnTriggerEnter2D(Collider2D other)
+    private IEnumerator OnTriggerEnter2D(Collider2D other)
     {
         // Enemies will deal damage to player health
         if(other.gameObject.CompareTag("Enemy")) {
-            // Remove ten from the variable health
+            if (canDamage == true) {
+                            // Remove one from the variable health
 			Player.health = Player.health - 1;
             // Play hurt sound
             GetComponent<AudioSource>().clip = hurt;
@@ -151,6 +158,11 @@ public class PlayerSettings : MonoBehaviour
 			UserInterface.GetComponent<InGameUI>().SetHealthText();
             // Run Injured() coroutine
             StartCoroutine(Injured());
+            canDamage = false;
+            } else {
+                yield return new WaitForSeconds(1f);
+                canDamage = true;
+            }
         }
         // Coins will give score to player
         if(other.gameObject.CompareTag("Coin")) {
